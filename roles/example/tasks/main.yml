@@ -1,33 +1,34 @@
-- name: Meep
-  debug:
+- name: Print a debug message, notify our handler, handlers only run on change (so we force a change here because debug normally doesn't change anything)
+  ansible.builtin.debug:
     msg: "Here's where we start doing tasks for the example role"
-  notify: run_when_notified
+  changed_when: true
+  notify: Run when notified
 
 - name: Import another file and run the tasks in it, provided my_hostvar_from_inventory is defined
-  import_tasks: another_tasks_file.yml
+  ansible.builtin.import_tasks: another_tasks_file.yml
   vars:
-    my_passed_in_variable: "Hello there, {{ my_hostvar_from_inventory }}"
+    example_passed_in_variable: "Hello there, {{ my_hostvar_from_inventory }}"
   when: my_hostvar_from_inventory is defined
 
 - name: Write debug messages based on loop we defined in vars
-  debug:
-    msg: "{{ example_my_something }}"
-  loop: "{{ my_list_of_somethings }}"
+  ansible.builtin.debug:
+    msg: "{{ example_something }}"
+  loop: "{{ example_list_of_somethings }}"
   loop_control:
-    loop_var: example_my_something
+    loop_var: example_something
 
 - name: Copy file to a directory
-  copy:
+  ansible.builtin.copy:
     src: my_file
     dest: /tmp/
-    mode: 0644
+    mode: "0644"
 
 - name: Copy Jinja template file to a directory and fill in variables
-  template:
+  ansible.builtin.template:
     src: my_template
     dest: /tmp/
-    mode: 0644
+    mode: "0644"
 
 - name: Morp
-  debug:
+  ansible.builtin.debug:
     msg: "And here we've finished doing tasks for the example role"

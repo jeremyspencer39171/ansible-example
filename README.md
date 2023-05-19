@@ -17,6 +17,8 @@
 
 2.3. [Examples](#examples)
 
+3. [Linting](#linting)
+
 
 ### Getting started <a name="start"></a>
 
@@ -36,7 +38,7 @@ Install Git and Ansible (if not already installed):
 ```sh
 sudo yum install -y git ansible
 ```
-*Note:* Ansible can also be installed via `pip`, and may give a more recent version:
+**Note:** Ansible can also be installed via `pip`, and may give a more recent version:
 ```sh
 pip install ansible
 ```
@@ -151,3 +153,17 @@ Or copy a file from the `files` directory:
 ```
 
 You can find many more of these by searching the internet for `ansible module` and then the thing you want to do, you'll probably end up at their documentation, like the one for the yum example above.
+
+#### Linting <a name="linting"></a>
+
+We can lint our Ansible repository using `ansible-lint`.
+The included GitHub workflow runs a linter when a pull request is created, but you can do it manually with:
+```sh
+# Install prerequisites
+pip3 install --upgrade pip
+pip3 install -r requirements_lint.txt
+# Run linter
+ansible-lint
+```
+
+**Note:** I have pinned the `ansible-lint` version in `requirements_lint.txt` for the moment because of a bug listed here: https://github.com/ansible/ansible-lint/issues/3452
