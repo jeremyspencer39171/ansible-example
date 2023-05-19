@@ -6,11 +6,12 @@
 - import_tasks: another_tasks_file.yml
   vars:
     my_passed_in_variable: "Hello there, {{ my_hostvar_from_inventory }}"
+  when: my_hostvar_from_inventory is defined
 
 - name: Write debug messages based on loop we defined in vars
   debug:
     msg: "{{ example_my_something }}"
-  loop: my_list_of_somethings
+  loop: "{{ my_list_of_somethings }}"
   loop_control:
     loop_var: example_my_something
 
