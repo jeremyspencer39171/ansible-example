@@ -1,0 +1,31 @@
+- name: Meep
+  debug:
+    msg: "Here's where we start doing tasks for the example role"
+  notify: run_when_notified
+
+- import_tasks: another_tasks_file.yml
+  vars:
+    my_passed_in_variable: "Hello there, {{ my_hostvar_from_inventory }}"
+
+- name: Write debug messages based on loop we defined in vars
+  debug:
+    msg: "{{ example_my_something }}"
+  loop: my_list_of_somethings
+  loop_control:
+    loop_var: example_my_something
+
+- name: Copy file to a directory
+  copy:
+    src: my_file
+    dest: /tmp/
+    mode: 0644
+
+- name: Copy Jinja template file to a directory and fill in variables
+  template:
+    src: my_template
+    dest: /tmp/
+    mode: 0644
+
+- name: Morp
+  debug:
+    msg: "And here we've finished doing tasks for the example role"

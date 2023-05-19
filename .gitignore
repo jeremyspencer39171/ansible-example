@@ -1,0 +1,8 @@
+*~
+*.retry
+*hosts*
+ansible.log
+roles/nfs
+roles/krb
+inventory.txt
+.vscode/*

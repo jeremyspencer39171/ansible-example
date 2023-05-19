@@ -1,0 +1,3 @@
+- name: run_when_notified
+  debug:
+    msg: "I run once at the end of a play so long as I've been notified"

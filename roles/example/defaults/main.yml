@@ -1,0 +1,1 @@
+my_passed_in_variable: "We can define defaults for vars here, they'll be used so long as they're not defined elsewhere."

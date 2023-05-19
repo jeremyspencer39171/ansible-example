@@ -1,0 +1,8 @@
+{
+    "_meta": {
+        "hostvars": {"localhost": {"my_hostvar_from_inventory": "I'm a hostvar defined in the inventory"}}
+    },
+    "example": {
+        "hosts": ["localhost"]
+    }
+}
