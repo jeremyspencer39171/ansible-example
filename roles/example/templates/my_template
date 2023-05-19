@@ -1,1 +1,1 @@
-These variables can be passed in during the task, but we can also grab others: {{ my_passed_in_variable }}
+These variables can be passed in during the task, but we can also grab others: {{ example_passed_in_variable }}

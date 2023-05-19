@@ -1,3 +1,4 @@
-- hosts: example
+- name: Example playbook showcasing some things you might want to do in a playbook
+  hosts: example
   roles:
     - example

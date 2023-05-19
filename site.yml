@@ -1,1 +1,2 @@
-- import_playbook: playbooks/my_playbook.yml
+- name: Import playbooks from another file, helps to keep them manageable when you have lots
+  import_playbook: playbooks/my_playbook.yml
