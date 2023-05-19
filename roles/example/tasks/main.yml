@@ -3,7 +3,8 @@
     msg: "Here's where we start doing tasks for the example role"
   notify: run_when_notified
 
-- import_tasks: another_tasks_file.yml
+- name: Import another file and run the tasks in it, provided my_hostvar_from_inventory is defined
+  import_tasks: another_tasks_file.yml
   vars:
     my_passed_in_variable: "Hello there, {{ my_hostvar_from_inventory }}"
   when: my_hostvar_from_inventory is defined
