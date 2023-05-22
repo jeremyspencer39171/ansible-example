@@ -165,5 +165,3 @@ pip3 install -r requirements_lint.txt
 # Run linter
 ansible-lint
 ```
-
-**Note:** I have pinned the `ansible-lint` version in `requirements_lint.txt` for the moment because of a bug listed here: https://github.com/ansible/ansible-lint/issues/3452
