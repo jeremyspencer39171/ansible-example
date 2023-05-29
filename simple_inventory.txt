@@ -1,2 +1,2 @@
 [example]
-<host-address> ansible_connection=localhost
+localhost ansible_connection=local
