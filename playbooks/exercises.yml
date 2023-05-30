@@ -1,55 +1,55 @@
 - hosts: exercise01
   roles:
-    - exercise/exercise01
+    - exercises/exercise01
 
 - hosts: exercise02
   roles:
-    - exercise/exercise02
+    - exercises/exercise02
 
 - hosts: exercise03
   roles:
-    - exercise/exercise03
+    - exercises/exercise03
 
 - hosts: exercise04
   roles:
-    - exercise/exercise04
+    - exercises/exercise04
 
 - hosts: exercise05
   roles:
-    - exercise/exercise05
+    - exercises/exercise05
 
 - hosts: exercise06
   roles:
-    - exercise/exercise06
+    - exercises/exercise06
 
 - hosts: exercise07
   roles:
-    - exercise/exercise07
+    - exercises/exercise07
 
 - hosts: exercise01sol
   roles:
-    - exercise/exercise01_sol
+    - exercises/exercise01_sol
 
 - hosts: exercise02sol
   roles:
-    - exercise/exercise02_sol
+    - exercises/exercise02_sol
 
 - hosts: exercise03sol
   roles:
-    - exercise/exercise03_sol
+    - exercises/exercise03_sol
 
 - hosts: exercise04sol
   roles:
-    - exercise/exercise04_sol
+    - exercises/exercise04_sol
 
 - hosts: exercise05sol
   roles:
-    - exercise/exercise05_sol
+    - exercises/exercise05_sol
 
 - hosts: exercise06sol
   roles:
-    - exercise/exercise06_sol
+    - exercises/exercise06_sol
 
 - hosts: exercise07sol
   roles:
-    - exercise/exercise07_sol
+    - exercises/exercise07_sol

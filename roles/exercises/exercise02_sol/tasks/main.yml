@@ -1,0 +1,28 @@
+- name: Copy template file to home directory - single var
+  template:
+    src: template
+    dest: ~/Desktop/hello.txt
+    mode: "0644"
+  vars:
+    passed_in_variable: "hello world!"
+
+- name: Copy template file home directory - two vars
+  template:
+    src: template
+    dest: ~/Desktop/{{ file_name }}
+    mode: "0644"
+  vars:
+    passed_in_variable: "hello world!"
+    file_name: "world.txt"
+
+- name: Copy template file home directory - two vars one loop
+  template:
+    src: template
+    dest: ~/Desktop/{{ file_name }}
+    mode: "0644"
+  vars:
+    passed_in_variable: "hello world!"
+  loop: ["hello_loop.txt", "world_loop.txt"]
+  loop_control:
+    loop_var: file_name
+    

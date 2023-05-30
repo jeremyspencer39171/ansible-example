@@ -1,2 +1,2 @@
-[example]
+[exercise05sol]
 localhost ansible_connection=local

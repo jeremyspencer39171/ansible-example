@@ -1,0 +1,6 @@
+- name: pip3 install numpy into a virtualenv at ~/Desktop/
+  pip:
+    name:
+      - numpy
+    virtualenv: ~/Desktop/exercise05_venv/
+    virtualenv_command: "{{ python_version }} -m virtualenv"
