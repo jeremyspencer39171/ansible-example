@@ -1,0 +1,2 @@
+#create and use a template to create multiple files with different names and/or contents
+#for this use ansible.builtin.template, variables, and maybe even loops. explore

@@ -1,0 +1,4 @@
+- name: Import task to create virtualenv from another file
+  import_tasks: create_venv.yml
+  vars:
+    python_version: "python3.9"

@@ -1,0 +1,10 @@
+- name: copy hello.txt to home directory
+  copy:
+    src: hello.txt
+    dest: ~/Desktop/
+    mode: 0644
+
+- name: create/write to world.txt in home directory
+  shell:
+    cmd: echo "hello world!" >> world.txt
+    chdir: ~/Desktop/
