@@ -1,0 +1,24 @@
+- name: pip3 install numpy into a virtualenv at ~/Desktop/
+  pip:
+    name:
+      - numpy
+    virtualenv: ~/Desktop/exercise07_venv/
+    virtualenv_command: "{{ python_version }} -m virtualenv"
+
+- name: pip3 install scipy into the virtualenv if Python 3.9 is used
+  pip:
+    name:
+      - scipy
+    virtualenv: ~/Desktop/exercise07_venv/
+  when: python_version == "python3.9"
+
+- name: pip3 install additional modules needed
+  pip:
+    name:
+      - "{{ pip_extra_module }}"
+    virtualenv: ~/Desktop/exercise07_venv/
+  loop: "{{ pip_extras }}"
+  loop_control:
+    loop_var: pip_extra_module
+  when: pip_extras is defined
+

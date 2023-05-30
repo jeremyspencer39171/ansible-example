@@ -26,6 +26,14 @@
   roles:
     - exercises/exercise07
 
+- hosts: exercise08
+  roles:
+    - exercises/exercise08
+
+- hosts: exercise09
+  roles:
+    - exercises/exercise09
+
 - hosts: exercise01sol
   roles:
     - exercises/exercise01_sol
@@ -53,3 +61,7 @@
 - hosts: exercise07sol
   roles:
     - exercises/exercise07_sol
+
+- hosts: exercise08sol
+  roles:
+    - exercises/exercise08_sol

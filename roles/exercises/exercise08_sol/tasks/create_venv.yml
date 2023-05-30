@@ -1,0 +1,27 @@
+- name: Creating a virtualenv for a specific Python version
+  debug:
+    msg: "Installing things for {{ python_version }}"
+
+- name: pip3 install numpy into a virtualenv at ~/Desktop/
+  pip:
+    name:
+      - numpy
+    virtualenv: "{{ venv_dir}}"
+    virtualenv_command: "{{ venv_cmd }}"
+
+- name: pip3 install scipy into the virtualenv if Python 3.9 is used
+  pip:
+    name:
+      - scipy
+    virtualenv: "{{ venv_dir }}"
+  when: python_version == "python3.9"
+
+- name: pip3 install additional modules needed
+  pip:
+    name:
+      - "{{ pip_extra_module }}"
+    virtualenv: "{{ venv_dir }}"
+  loop: "{{ pip_extras }}"
+  loop_control:
+    loop_var: pip_extra_module
+  when: pip_extras is defined
