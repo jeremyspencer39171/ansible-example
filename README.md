@@ -34,13 +34,12 @@ If something in here doesn't work, or is out of date, or you want something addi
 
 
 #### Setting up the Ansible host VM: <a name="setup"></a>
-Install Git and Ansible (if not already installed):
+Install Python3.11, Git and Ansible (if not already installed):
 ```sh
-sudo yum install -y git ansible
+sudo yum install -y python3.11 python3.11-pip python3.11-devel git
 ```
-**Note:** Ansible can also be installed via `pip`, and may give a more recent version:
 ```sh
-pip install ansible
+python3.11 -m pip install ansible
 ```
 Clone this repository:
 ```sh
