@@ -34,13 +34,13 @@ If something in here doesn't work, or is out of date, or you want something addi
 
 
 #### Setting up the Ansible host VM: <a name="setup"></a>
-Install Git and Ansible (if not already installed):
+Install Python3.11, Git and Ansible (if not already installed):
 ```sh
-sudo yum install -y git ansible
+sudo yum install -y python3.11 python3.11-pip python3.11-devel git
 ```
-**Note:** Ansible can also be installed via `pip`, and may give a more recent version:
+**Note:** Ansible versions 10 or greater are incompatible with RHEL8 and its derivations, so if you're using Rocky 8, for example, make sure to pin the version.
 ```sh
-pip install ansible
+python3.11 -m pip install ansible==9.8.0
 ```
 Clone this repository:
 ```sh
