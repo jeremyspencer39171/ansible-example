@@ -38,8 +38,9 @@ Install Python3.11, Git and Ansible (if not already installed):
 ```sh
 sudo yum install -y python3.11 python3.11-pip python3.11-devel git
 ```
+**Note:** Ansible versions 10 or greater are incompatible with RHEL8 and its derivations, so if you're using Rocky 8, for example, make sure to pin the version.
 ```sh
-python3.11 -m pip install ansible
+python3.11 -m pip install ansible==9.8.0
 ```
 Clone this repository:
 ```sh
