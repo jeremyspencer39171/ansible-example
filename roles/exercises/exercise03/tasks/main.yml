@@ -1,0 +1,2 @@
+# use the ansible.builtin.pip module to create a virtualenv and install numpy inside it
+# (check what Python version is used)

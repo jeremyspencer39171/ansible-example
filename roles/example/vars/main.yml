@@ -1,4 +1,5 @@
+---
 example_list_of_somethings:
- - "One"
- - "Two"
- - "Three"
+  - One
+  - Two
+  - Three

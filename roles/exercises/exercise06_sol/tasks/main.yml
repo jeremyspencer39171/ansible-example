@@ -1,0 +1,3 @@
+---
+- name: Import task to create virtualenv from another file
+  ansible.builtin.import_tasks: create_venv.yml

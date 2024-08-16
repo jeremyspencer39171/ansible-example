@@ -1,3 +1,4 @@
+---
 - name: I'm a task that runs when we use import_tasks
   ansible.builtin.debug:
     msg: "{{ example_passed_in_variable }}"

@@ -1,0 +1,3 @@
+# same as exercise 6 but now import the role from exercise 6
+# and loop over both Python versions using the ansible.builtin.include_role
+# and a loop (likely requires the name/location of the virtualenv to be variable as well)

@@ -1,0 +1,144 @@
+---
+######
+# This is not meant as an actual exercise to run, but to give an idea of how a complex practical
+# example might look like.
+######
+# Role may take the following optional variables (defaults are defined in defaults/main.yml):
+# mantid_versions: list, a list of versions defining the versions to install
+# nightly_flag: boolean, will install nightly version if True
+# mantid51_flag: boolean, if MantidPlot from v5.1 is required in addition to a newer Mantid version
+
+- ansible.builtin.include_role: name=software/utilities/mambaforge
+- name: Installing libXScrnSaver
+  ansible.builtin.yum:
+    name: libXScrnSaver
+
+- name: Construct install information facts for release versions
+  vars:
+    exercises_exercise09_mantid_install_info:
+      version: "{{ exercises_exercise09_mantid_version | string }}"
+      channel: mantid
+      install_prefix: /opt/mantidworkbench{{ exercises_exercise09_mantid_version | string }}
+  ansible.builtin.set_fact:
+    exercises_exercise09_mantid_install_infos: >
+      {{ exercises_exercise09_mantid_install_infos | default([]) | union([exercises_exercise09_mantid_install_info]) }}
+  loop: "{{ mantid_versions }}"
+  loop_control:
+    loop_var: exercises_exercise09_mantid_version
+
+- name: Add nightly install information
+  vars:
+    exercises_exercise09_mantid_install_info:
+      version: Nightly
+      channel: mantid/label/nightly
+      install_prefix: "{{ install_prefix_nightly }}"
+  ansible.builtin.set_fact:
+    exercises_exercise09_mantid_install_infos: "{{ exercises_exercise09_mantid_install_infos | union([exercises_exercise09_mantid_install_info]) }}"
+  when: nightly_flag | bool
+
+- name: Create conda environments for specified MantidWorkbench versions
+  vars:
+    version_specifier: >-
+      {{
+        (exercises_exercise09_mantid_install_info['version'] != 'Nightly')
+        | ternary('=' + exercises_exercise09_mantid_install_info['version']
+        | string, '')
+      }}
+  ansible.builtin.shell: |
+    mamba create --prefix {{ exercises_exercise09_mantid_install_info['install_prefix'] }}
+    mamba install --yes --channel {{ exercises_exercise09_mantid_install_info['channel'] }} \
+      --prefix {{ exercises_exercise09_mantid_install_info['install_prefix'] }} mantidworkbench{{ version_specifier }}
+  changed_when: true
+  loop: "{{ exercises_exercise09_mantid_install_infos }}"
+  loop_control:
+    loop_var: exercises_exercise09_mantid_install_info
+
+- name: Conda install any additional packages required
+  ansible.builtin.command: >
+    mamba install
+    --yes
+    --prefix {{ exercises_exercise09_mantid_install_info['install_prefix'] }}
+    {{ conda_extras | join(' ') }}
+  loop: "{{ exercises_exercise09_mantid_install_infos }}"
+  loop_control:
+    loop_var: exercises_exercise09_mantid_install_info
+  changed_when: true
+  when: conda_extras is defined
+
+- name: Pip install any additional packages requested
+  ansible.builtin.command: >
+    mamba run
+    --prefix {{ exercises_exercise09_mantid_install_info['install_prefix'] }}
+    pip install --no-input {{ pip_extras | join(' ') }}
+  loop: "{{ exercises_exercise09_mantid_install_infos }}"
+  loop_control:
+    loop_var: exercises_exercise09_mantid_install_info
+  changed_when: true
+  when: pip_extras is defined
+
+- name: Create desktop shortcuts
+  ansible.builtin.template:
+    src: mantid_workbench.desktop.j2
+    dest: /etc/xdg/applications/mantid_workbench{{ exercises_exercise09_mantid_install_info['version'] }}.desktop
+    owner: root
+    mode: "0444"
+  loop: "{{ exercises_exercise09_mantid_install_infos }}"
+  loop_control:
+    loop_var: exercises_exercise09_mantid_install_info
+
+- name: Copy across Mantid Workbench icon
+  ansible.builtin.copy:
+    src: mantid_workbench.png
+    dest: /usr/share/pixmaps/mantid_workbench.png
+    mode: "0644"
+
+- name: Copy across MantidWorkbench Nightly icon
+  ansible.builtin.copy:
+    src: mantid_workbenchnightly.png
+    dest: /usr/share/pixmaps/mantid_workbenchnightly.png
+    mode: "0644"
+  when: nightly_flag | bool
+
+- name: Add cron job to update MantidWorkbench Nightly
+  ansible.builtin.cron:
+    name: Update MantidWorkbench Nightly
+    minute: "0"
+    hour: "2"
+    job: mamba activate {{ install_prefix_nightly }} && mamba update --all -y
+  when: nightly_flag | bool
+
+- name: Install ipykernel for MantidWorkbench versions to use it in Jupyter
+  ansible.builtin.command:
+    cmd: >
+      {{ exercises_exercise09_mantid_install_info['install_prefix'] }}/bin/ipython kernel install
+      --name=mantid-{{ exercises_exercise09_mantid_install_info['version'] }}
+  loop: "{{ exercises_exercise09_mantid_install_infos }}"
+  loop_control:
+    loop_var: exercises_exercise09_mantid_install_info
+  changed_when: true
+
+- name: Create optional /etc/mantid.local.properties file
+  ansible.builtin.file:
+    path: /etc/mantid.local.properties
+    state: touch
+    mode: "0666"
+
+# This registers the number of GPUs present (literally the number of NVIDIA pci cards), as a STRING
+- name: Register number of GPUs
+  ansible.builtin.shell:
+    cmd: |
+      set -o pipefail # <-- adding this will prevent surprises
+      lspci | grep NVIDIA | wc -l
+    warn: false
+  changed_when: false
+  register: gpus_present
+
+- name: Enable OpenGL in Mantid if Nvidia GPU present
+  ansible.builtin.lineinfile:
+    path: /etc/mantid.local.properties
+    regexp: MantidOptions\.InstrumentView\.UseOpenGL =.*\n
+    line: MantidOptions.InstrumentView.UseOpenGL = {{ 'On' if gpus_present.stdout != "0" else 'Off' }}
+
+- name: Install an additional Mantid version (v5.1) from rpm if required
+  ansible.builtin.import_tasks: mantid51.yml
+  when: mantid51_flag | bool

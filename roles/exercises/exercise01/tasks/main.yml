@@ -1,0 +1,4 @@
+# exercise 01
+# Create two text files called hello.txt and world.txt with the content "hello world!" using two ways:
+# - creating an copying an existing file from the "/files" subfolder using ansible.builtin.copy
+# - using a shell command via ansible.builtin.shell

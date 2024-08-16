@@ -1,0 +1,7 @@
+---
+- name: Pip3 install numpy into a virtualenv at ~/Desktop/
+  ansible.builtin.pip:
+    name:
+      - numpy
+    virtualenv: ~/Desktop/exercise05_venv/
+    virtualenv_command: "{{ python_version }} -m virtualenv"

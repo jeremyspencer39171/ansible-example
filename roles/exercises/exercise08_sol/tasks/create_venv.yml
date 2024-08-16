@@ -1,0 +1,28 @@
+---
+- name: Creating a virtualenv for a specific Python version
+  ansible.builtin.debug:
+    msg: Installing things for {{ exercises_exercise08_python_version }}
+
+- name: Pip3 install numpy into a virtualenv at ~/Desktop/
+  ansible.builtin.pip:
+    name:
+      - numpy
+    virtualenv: "{{ venv_dir }}"
+    virtualenv_command: "{{ venv_cmd }}"
+
+- name: Pip3 install scipy into the virtualenv if Python 3.9 is used
+  ansible.builtin.pip:
+    name:
+      - scipy
+    virtualenv: "{{ venv_dir }}"
+  when: exercises_exercise08_python_version == "python3.9"
+
+- name: Pip3 install additional modules needed
+  ansible.builtin.pip:
+    name:
+      - "{{ exercises_exercise08_pip_extra_module }}"
+    virtualenv: "{{ venv_dir }}"
+  loop: "{{ pip_extras }}"
+  loop_control:
+    loop_var: exercises_exercise08_pip_extra_module
+  when: pip_extras is defined
