@@ -1,3 +1,4 @@
+---
 - name: Run when notified
   ansible.builtin.debug:
-    msg: "I run once at the end of a play so long as I've been notified"
+    msg: I run once at the end of a play so long as I've been notified

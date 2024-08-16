@@ -1,7 +1,8 @@
+---
 - name: Import task to create virtualenv from another file
-  include_tasks: create_venv.yml
+  ansible.builtin.include_tasks: create_venv.yml
   vars:
-    pip_extras: [ "matplotlib", "periodictable==1.5.3" ]
-  loop: [ "python3.6", "python3.9" ]
+    pip_extras: [matplotlib, periodictable==1.5.3]
+  loop: [python3.6, python3.9]
   loop_control:
-    loop_var: python_version
+    loop_var: exercises_exercise08_python_version

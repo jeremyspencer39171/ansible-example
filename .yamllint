@@ -1,3 +1,0 @@
-rules:
-  truthy:
-    allowed-values: ["true", "false", "yes", "no"]

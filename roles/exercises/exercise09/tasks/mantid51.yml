@@ -1,28 +1,29 @@
+---
 - name: Add the Mantid repo
-  yum_repository:
+  ansible.builtin.yum_repository:
     name: isis-rhel
-    description: "ISIS Software Repository for Redhat Enterprise Linux $releasever - $basearch"
-    baseurl: "http://yum.isis.rl.ac.uk/rhel/$releasever/$basearch"
-    gpgcheck: no
+    description: ISIS Software Repository for Redhat Enterprise Linux $releasever - $basearch
+    baseurl: http://yum.isis.rl.ac.uk/rhel/$releasever/$basearch
+    gpgcheck: false
 
 - name: Add the ISIS software repo
-  yum_repository:
+  ansible.builtin.yum_repository:
     name: isis-rhel-noarch
-    description: "ISIS Software Repository for Redhat Enterprise Linux $releasever - noarch"
-    baseurl: "http://yum.isis.rl.ac.uk/rhel/$releasever/noarch"
-    gpgcheck: no
+    description: ISIS Software Repository for Redhat Enterprise Linux $releasever - noarch
+    baseurl: http://yum.isis.rl.ac.uk/rhel/$releasever/noarch
+    gpgcheck: false
 
 - name: Install an old Mantid version (v5.1) from rpm in a separate folder
-  yum:
+  ansible.builtin.yum:
     name:
       - mantid51
 
 - name: Copy across the shortcuts for this Mantid version
-  copy:
-    src: "{{ software_analysis_mantid_mantid51_src_file }}"
+  ansible.builtin.copy:
+    src: "{{ exercises_exercise09_mantid_mantid51_src_file }}"
     dest: /etc/xdg/applications/
     owner: root
-    mode: 0444
+    mode: "0444"
   loop: "{{ query('fileglob', 'applications/mantid51*') }}"
   loop_control:
-    loop_var: software_analysis_mantid_mantid51_src_file
+    loop_var: exercises_exercise09_mantid_mantid51_src_file

@@ -1,67 +1,85 @@
-- hosts: exercise01
+---
+- name: Playbook for exercise01
+  hosts: exercise01
   roles:
     - exercises/exercise01
 
-- hosts: exercise02
+- name: Playbook for exercise02
+  hosts: exercise02
   roles:
     - exercises/exercise02
 
-- hosts: exercise03
+- name: Playbook for exercise03
+  hosts: exercise03
   roles:
     - exercises/exercise03
 
-- hosts: exercise04
+- name: Playbook for exercise04
+  hosts: exercise04
   roles:
     - exercises/exercise04
 
-- hosts: exercise05
+- name: Playbook for exercise05
+  hosts: exercise05
   roles:
     - exercises/exercise05
 
-- hosts: exercise06
+- name: Playbook for exercise06
+  hosts: exercise06
   roles:
     - exercises/exercise06
 
-- hosts: exercise07
+- name: Playbook for exercise07
+  hosts: exercise07
   roles:
     - exercises/exercise07
 
-- hosts: exercise08
+- name: Playbook for exercise08
+  hosts: exercise08
   roles:
     - exercises/exercise08
 
-- hosts: exercise09
+- name: Playbook for exercise09
+  hosts: exercise09
   roles:
     - exercises/exercise09
 
-- hosts: exercise01sol
+- name: Playbook for exercise01sol
+  hosts: exercise01sol
   roles:
     - exercises/exercise01_sol
 
-- hosts: exercise02sol
+- name: Playbook for exercise02sol
+  hosts: exercise02sol
   roles:
     - exercises/exercise02_sol
 
-- hosts: exercise03sol
+- name: Playbook for exercise03sol
+  hosts: exercise03sol
   roles:
     - exercises/exercise03_sol
 
-- hosts: exercise04sol
+- name: Playbook for exercise04sol
+  hosts: exercise04sol
   roles:
     - exercises/exercise04_sol
 
-- hosts: exercise05sol
+- name: Playbook for exercise05sol
+  hosts: exercise05sol
   roles:
     - exercises/exercise05_sol
 
-- hosts: exercise06sol
+- name: Playbook for exercise06sol
+  hosts: exercise06sol
   roles:
     - exercises/exercise06_sol
 
-- hosts: exercise07sol
+- name: Playbook for exercise07sol
+  hosts: exercise07sol
   roles:
     - exercises/exercise07_sol
 
-- hosts: exercise08sol
+- name: Playbook for exercise08sol
+  hosts: exercise08sol
   roles:
     - exercises/exercise08_sol

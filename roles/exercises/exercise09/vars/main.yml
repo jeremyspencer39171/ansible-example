@@ -1,1 +1,2 @@
-install_prefix_nightly: "/opt/mantidworkbenchnightly"
+---
+install_prefix_nightly: /opt/mantidworkbenchnightly

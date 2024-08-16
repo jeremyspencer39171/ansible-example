@@ -1,2 +1,2 @@
-# rerun exercise01 but now delete the nocows=1 line in ansible.cfg 
+# rerun exercise01 but now delete the nocows=1 line in ansible.cfg
 # and see what it does to the logging (including ansible.log)

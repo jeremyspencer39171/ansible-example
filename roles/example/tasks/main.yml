@@ -1,13 +1,14 @@
+---
 - name: Print a debug message, notify our handler, handlers only run on change (so we force a change here because debug normally doesn't change anything)
   ansible.builtin.debug:
-    msg: "Here's where we start doing tasks for the example role"
+    msg: Here's where we start doing tasks for the example role
   changed_when: true
   notify: Run when notified
 
 - name: Import another file and run the tasks in it, provided my_hostvar_from_inventory is defined
   ansible.builtin.import_tasks: another_tasks_file.yml
   vars:
-    example_passed_in_variable: "Hello there, {{ my_hostvar_from_inventory }}"
+    example_passed_in_variable: Hello there, {{ my_hostvar_from_inventory }}
   when: my_hostvar_from_inventory is defined
 
 - name: Write debug messages based on loop we defined in vars
@@ -31,4 +32,4 @@
 
 - name: Morp
   ansible.builtin.debug:
-    msg: "And here we've finished doing tasks for the example role"
+    msg: And here we've finished doing tasks for the example role
